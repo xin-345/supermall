@@ -1,11 +1,17 @@
 <template>
+	<div class="feature">
+		<a href="">
+			<img src="" >
+		</a>
+		
+	</div>
 </template>
 
 <script>
 	export default {
-		name: "Feature"
+		name: "FeatureView"
 	}
 </script>
 
-<style>
+<style scoped>
 </style>
