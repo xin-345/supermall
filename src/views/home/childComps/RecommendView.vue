@@ -31,7 +31,6 @@
 		font-size: 12px;
 		
 		padding: 10px 0 15px ;
-		border-bottom: 4px solid #eee;
 	}
 	
 	.recommend-item {

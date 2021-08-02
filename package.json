@@ -8,7 +8,11 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@better-scroll/core": "^2.4.1",
+    "@better-scroll/observe-image": "^2.4.1",
+    "@better-scroll/pull-up": "^2.0.0-beta.10",
     "axios": "^0.21.1",
+    "better-scroll": "^2.4.1",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-router": "^3.5.2",
@@ -27,6 +31,6 @@
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
-   "parser": "babel-eslint"
-   }
+    "parser": "babel-eslint"
+  }
 }
