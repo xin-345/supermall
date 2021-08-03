@@ -3,6 +3,7 @@
 		<detail-nav-bar/>
 		<detail-swiper :top-images = "topImages" ></detail-swiper>
 		<detail-base-info :goods="goods"></detail-base-info>
+		<detail-shop-info :shop="shop"></detail-shop-info>
 	</div>
 </template>
 
@@ -10,22 +11,25 @@
 	import DetailNavBar from './childComps/DetailNavBar.vue'
 	import DetailSwiper from './childComps/DetailSwiper.vue'
 	import DetailBaseInfo from './childComps/DetailBaseInfo.vue'
+	import DetailShopInfo from './childComps/DetailShopInfo.vue'
 	
-	import {getDetail,Goods} from 'network/detail.js'
+	import {getDetail,Goods,Shop} from 'network/detail.js'
 	
 	export default {
 		name:"Detail",
 		components:{
 			DetailNavBar,
 			DetailSwiper,
-			DetailBaseInfo
+			DetailBaseInfo,
+			DetailShopInfo
 		},
 		data() {
 			return{
 				iid:null,
 				topImages:[],
 				// 对象
-				goods:{}
+				goods:{},
+				shop:{}
 				
 			}
 		},
@@ -43,7 +47,10 @@
 				
 				// 获取商品信息
 				this.goods = new Goods(data.itemInfo,data.columns,data.shopInfo.services)
-				console.log(this.goods)
+				
+				// 创建店铺信息的对象
+				this.shop = new Shop(data.shopInfo)
+				console.log(this.shop)
 			})
 			
 			
