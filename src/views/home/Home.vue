@@ -92,13 +92,15 @@
 	  this.getHomeGoods('pop'),
 	  this.getHomeGoods('new'),
 	  this.getHomeGoods('sell')
-	
+	  
     },
 	mounted() {
+		
+		// 总线 爷爷组件监听  （$bus事件总线要在 main.js 中创建$bus 原型 ）
 		// 3.监听item中图片加载完成
-		 // this.$bus.$on('itemImageLoad',()=>{
-				 //  console.log('3333');
-		 // })
+		 this.$bus.$on('itemImageLoad',()=>{
+					this.$refs.scroll.refresh()
+		 })
 		 
 		// 获取tabControl的offsetTop
 		// 所有组件都有一个属性 $el,用于获取组件中的元素

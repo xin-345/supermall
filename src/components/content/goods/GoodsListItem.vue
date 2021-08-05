@@ -1,7 +1,6 @@
 <template>
 	<div class="goods-item" @click="itemClick">
-		<!-- @load="imageLoad" -->
-		<img :src="goodsItem.show.img" class="goods-img" >
+		<img :src="showImage" class="goods-img" @load="imageLoad" >
 		<div class="goods-info">
 			<p>{{goodsItem.title}}</p>
 			<span class="price">{{goodsItem.price}}</span>
@@ -21,10 +20,16 @@
 				}
 			}
 		},
+		computed:{
+			showImage() {
+				return this.goodsItem.image || this.goodsItem.show.img
+			}
+		},
 		methods:{
-			// imageLoad(){
-			// 	this.$bus.$emit('itemImageLoad')
-			// }
+			// 总线  孙子组件要穿给爷爷 传递方法
+			imageLoad(){
+				this.$bus.$emit('itemImageLoad')
+			},
 			
 			itemClick(){
 				// 使用push方便返回

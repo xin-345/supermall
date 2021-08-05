@@ -66,12 +66,15 @@
 		},
 		methods:{
 			scrollTo(x, y, time=300) {
-			  this.scroll.scrollTo(x, y, time)
+			  this.scroll && this.scroll.scrollTo && this.scroll.scrollTo(x, y, time)
 			},
 			// 
 			finishPullUp(){
 				// 等待数据请求完成，并且将新的数据展示出来后
 				this.scroll && this.scroll.finishPullUp()
+			},
+			refresh() {
+				this.scroll.refresh()
 			}
 		}
 	}

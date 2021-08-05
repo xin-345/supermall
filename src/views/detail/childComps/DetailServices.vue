@@ -1,5 +1,5 @@
 <template>
-	<div class="services-wrapper">
+	<div class="services-wrapper" ref="services" >
 		<div class="services-inner" ref="close">
 			<div class="services-head">
 				<div class="head-title">服务说明</div>
@@ -43,12 +43,20 @@
 				default(){
 					return false
 				}
+			},
+			height:{
+				type:Number,
+				default(){
+					return 10
+				}
 			}
 		},
-		
 		methods:{
 			closeClick(){
 				var close = this.$refs.close;
+				close.classList.add("inclose")
+				// colse.classList.add("innerClose")
+				
 				close.style.bottom = '-100%';
 				
 				var bg = this.$refs.bg;
@@ -56,7 +64,11 @@
 				bg.style.backgroundColor = 'transparent';
 			},
 			open(){
+				
+				console.log(this.height);
+				
 				var close = this.$refs.close;
+				close.classList.add("inopen")
 				close.style.bottom = '0';
 				
 				var bg = this.$refs.bg;
@@ -68,15 +80,20 @@
 </script>
 
 <style scoped>
-	
 	.services-inner {
 		position: fixed;
 		bottom: -100%;
-		z-index: 999;
+		z-index: 99;
 		background-color: #FFFFFF;
 		transition: bottom .3s ;
+		
 	}
-	
+	.inclose {
+		bottom:-100%;
+	}
+	.inopen {
+		bottom:0;
+	}
 	.services-head {
 		position: relative;
 		color: #999;
@@ -103,8 +120,8 @@
 		position: fixed;
 		top: 0px;
 		left: 0px;
-		background-color: transparent; 
-		transition: background-color .8s;
+		background-color: rgba(51,51,51,.0); 
+		transition: background-color 0.8s;
 	}
 	
 	.services-content {

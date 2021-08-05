@@ -8,11 +8,11 @@
 			<div class="shop-inner">
 				<div class="inner-left">
 					<div class="fans">
-						<span class="fans1">{{shop.fans}}</span>
+						<span class="fans1">{{shop.fans | sellCountFilter(shop.fans )}}</span>
 						<span class="fans2">总销量</span>
 					</div>
 					<div class="goods-count">
-						<span class="fans1">{{shop.goodsCount}}</span>
+						<span class="fans1">{{shop.goodsCount | sellCountFilter(shop.goodsCount)}}</span>
 						<span class="fans2">全部宝贝</span>
 					</div>
 				</div>
@@ -29,6 +29,9 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="shop-bottom">
+			<div class="enter-shop">进店逛逛</div>
 		</div>
 	</div>
 </template>
@@ -56,9 +59,9 @@
 <style scoped>
 	.shop-info {
 		position: relative;
-		height: 600px;
 		background-color: #fff;
 		padding: 20px 5px;
+		border-bottom: 4px solid #F2F5F8;
 	}
 	
 	.shop-top {
@@ -118,5 +121,18 @@
 	}
 	.red {
 		color: red;
+	}
+	
+	.shop-bottom {
+		font-size: 14px;
+		color: #333333;
+		text-align: center;
+		margin: 10px auto;
+		margin-top: 20px;
+		width: 140px;
+		height: 32px;
+		line-height: 32px;
+		border-radius: 8px;
+		background-color: #F2F5F8;
 	}
 </style>

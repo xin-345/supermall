@@ -21,24 +21,16 @@
 			</div>
 		</div>
 		
-		<detail-services class="detail-services" v-if="servicesIsShow" ref="detailServices"></detail-services>
+		
 		
 	</div>
 </template>
 
 <script>
-	import DetailServices from './DetailServices.vue'
+	
 	
 	export default {
 		name:"DetailBaseInfo",
-		components:{
-			DetailServices,
-		},
-		data() {
-			return {
-				servicesIsShow:false
-			}
-		},
 		props:{
 			goods:{
 				type:Object,
@@ -49,10 +41,11 @@
 		},
 		methods:{
 			servicesClick(){
-				this.servicesIsShow = true
-				setTimeout(()=>{
-					this.$refs.detailServices.open()
-				},10)
+				this.$emit('servicesShow')
+				// this.servicesIsShow = true
+				// setTimeout(()=>{
+				// 	this.$refs.detailServices.open()
+				// },10)
 			}
 		}
 		
@@ -64,7 +57,7 @@
 		margin-top: 15px;
 		padding: 0 8px;
 		color: #999;
-		border-bottom: 4px solid #f2f5f8;
+		border-bottom: 3px solid #f2f5f8;
 	}
 	.info-title {
 		font-size: 18px;
@@ -99,7 +92,7 @@
 		display: flex;
 		justify-content: space-between;
 		padding:5px 0;
-		border-bottom: 2px solid #F2F5F8;
+		border-bottom: 1px solid #F2F5F8;
 	}
 	.info-other span {
 		font-size: 12px;
@@ -110,7 +103,7 @@
 		justify-content: space-between;
 	}
 	.info-services-item {
-		line-height: 50px;
+		line-height: 60px;
 		font-size: 14px;
 		color: #333;
 	}

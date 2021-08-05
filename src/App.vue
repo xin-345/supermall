@@ -22,6 +22,6 @@
 	
 	.main-tab-bar {
 		position: relative;
-		z-index: 99;
+		z-index: 8;
 	}
 </style>
