@@ -28,7 +28,15 @@
 		methods:{
 			// 总线  孙子组件要穿给爷爷 传递方法
 			imageLoad(){
-				this.$bus.$emit('itemImageLoad')
+				// this.$bus.$emit('itemImageLoad')
+				
+				if(this.$route.path.indexOf('/home') !== -1){
+					this.$bus.$emit('homeItemImageLoad')
+				}
+				else if (this.$route.path.indexOf('/detail') !== -1){
+					this.$bus.$emit('detailItemImageLoad')
+				}
+				
 			},
 			
 			itemClick(){

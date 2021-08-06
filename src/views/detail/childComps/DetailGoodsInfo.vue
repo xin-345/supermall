@@ -10,7 +10,7 @@
 		<div class="info-key">{{detailInfo.detailImage[0].key}}</div>
 		<div class="info-list">
 			<img v-for="(item,index) in detailInfo.detailImage[0].list" :key="index" 
-				:src="item" 
+				:src="item"   @load="imageLoad"
 			/>
 		</div>
 	</div>
@@ -27,13 +27,10 @@
 				}
 			}
 		},
-		data() {
-			return {
-				
-			}
-		},
 		methods:{
-			
+			imageLoad(){
+				this.$emit('detailImageLoad')
+			}
 		}
 	}
 </script>

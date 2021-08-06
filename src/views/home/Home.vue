@@ -44,6 +44,7 @@
   
   // 组件导入加大括号是因为没有使用  default 导出
   import {getHomeMultidata,getHomeGoods} from 'network/home.js'
+  import {debounce} from 'common/utils.js'
   
 
  
@@ -73,7 +74,8 @@
 		currentType:'pop',
 		isShowBackTop:false,
 		tabOffsetTop:0,
-		isTabFixed:false
+		isTabFixed:false,
+		saveY:0 
       }
     },
 	computed:{
@@ -83,6 +85,19 @@
 	},
 	destroyed() {
 		console.log('1111')
+	},
+	// 保留Home 的位置
+	activated() {
+		this.$refs.scroll.refresh()
+		this.$refs.scroll.scrollTo(0,this.saveY,0)
+	},
+	deactivated() {
+		// 保存 Y 值
+		this.saveY = this.$refs.scroll.getScrollY()
+		
+		// 取消全局事件的监听
+		// this.$bus.$off('itemImageLoad')
+		
 	},
     created(){
       // 1.请求多个数据
@@ -95,11 +110,11 @@
 	  
     },
 	mounted() {
-		
+		const refresh = debounce(this.$refs.scroll.refresh,200)
 		// 总线 爷爷组件监听  （$bus事件总线要在 main.js 中创建$bus 原型 ）
 		// 3.监听item中图片加载完成
-		 this.$bus.$on('itemImageLoad',()=>{
-					this.$refs.scroll.refresh()
+		 this.$bus.$on('homeItemImageLoad',()=>{
+			refresh()
 		 })
 		 
 		// 获取tabControl的offsetTop

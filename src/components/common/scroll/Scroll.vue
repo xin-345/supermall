@@ -74,7 +74,11 @@
 				this.scroll && this.scroll.finishPullUp()
 			},
 			refresh() {
-				this.scroll.refresh()
+				console.log('监听图片加载完成')
+				this.scroll && this.scroll.refresh()  
+			},
+			getScrollY(){
+				return this.scroll ? this.scroll.y : 0
 			}
 		}
 	}
