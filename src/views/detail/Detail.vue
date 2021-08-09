@@ -3,6 +3,10 @@
 		<detail-nav-bar @titleClick="titleClick" ref="nav"/>
 		<!-- 属性：topImages  传入值:top-images -->
 		<scroll class="content"  @scroll="contentScroll" ref="scroll" :probe-type="3"  >
+			<div>
+				<li v-for="item in $store.state.cartList "> {{item}}</li>
+			</div>
+			
 			<detail-swiper :top-images = "topImages" ></detail-swiper>
 			<detail-base-info :goods="goods" @servicesShow="servicesShow"></detail-base-info>
 			<detail-shop-info :shop="shop"></detail-shop-info>
@@ -12,7 +16,7 @@
 			<goods-list  ref="recommend"  :goods="recommends"></goods-list>
 		</scroll>
 		<back-top @click.native="backClick" class="back-top" v-show="isShowBackTop" ></back-top>
-		<detail-bottom-bar class="detail-bottom-bar"></detail-bottom-bar>
+		<detail-bottom-bar class="detail-bottom-bar" @addCart = "addToCart"></detail-bottom-bar>
 		<detail-services class="detail-services" v-if="servicesIsShow" ref="detailServices" :height="height"></detail-services>
 	</div>
 </template>
@@ -131,9 +135,9 @@
 				// debounce  防抖 不会打印多次
 				this.themeTopYs = [];
 				this.themeTopYs.push(0);
-				this.themeTopYs.push(this.$refs.params.$el.offsetTop);
-				this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
-				this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
+				this.themeTopYs.push(this.$refs.params.$el.offsetTop -44);
+				this.themeTopYs.push(this.$refs.comment.$el.offsetTop - 44);
+				this.themeTopYs.push(this.$refs.recommend.$el.offsetTop  -44);
 				// 给数组多push 一个最大值  方便之后做判断
 				this.themeTopYs.push(Number.MAX_VALUE);
 				console.log(this.themeTopYs)
@@ -166,7 +170,7 @@
 			},
 			titleClick(index){
 				console.log(index)
-				this.$refs.scroll.scrollTo(0,44-this.themeTopYs[index],500)
+				this.$refs.scroll.scrollTo(0,-this.themeTopYs[index],500)
 			},
 			
 			servicesShow(){
@@ -214,7 +218,18 @@
 					}
 				}
 			},
-			
+			addToCart(){
+				// 获取商品购物车需要展示的信息
+				const product = {}
+				product.image = this.topImages[0];
+				product.title = this.goods.title;
+				product.desc = this.goods.desc;
+				product.price = this.goods.realPrice;
+				product.iid = this.iid;
+				
+				// 2.将商品添加到购物车里
+				this.$store.dispatch('addCart',product)
+			}
 		}
 	}
 </script>
