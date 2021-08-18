@@ -89,6 +89,8 @@
 	// 保留Home 的位置
 	activated() {
 		this.$refs.scroll.refresh()
+		
+		
 		this.$refs.scroll.scrollTo(0,this.saveY,0)
 	},
 	deactivated() {
@@ -107,6 +109,7 @@
 	  this.getHomeGoods('pop'),
 	  this.getHomeGoods('new'),
 	  this.getHomeGoods('sell')
+	  
 	  
     },
 	mounted() {
@@ -199,6 +202,7 @@
   .home-nav {
     background-color: var(--color-tint);
     color: #FFFFFF;
+	font-weight: 600;
 	
 	/* 在使用浏览器原生滚动时，为了让导航不跟随一起滚动 */
 	/* position: fixed;

@@ -15,7 +15,8 @@
 
   #tab-bar {
     display: flex;
-    background-color: #f6f6f6;
+	background-color: #fff;
+    /* background-color: #f6f6f6; */
 
     position: fixed;
     left: 0;

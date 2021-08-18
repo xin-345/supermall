@@ -3,10 +3,6 @@
 		<detail-nav-bar @titleClick="titleClick" ref="nav"/>
 		<!-- 属性：topImages  传入值:top-images -->
 		<scroll class="content"  @scroll="contentScroll" ref="scroll" :probe-type="3"  >
-			<div>
-				<li v-for="item in $store.state.cartList "> {{item}}</li>
-			</div>
-			
 			<detail-swiper :top-images = "topImages" ></detail-swiper>
 			<detail-base-info :goods="goods" @servicesShow="servicesShow"></detail-base-info>
 			<detail-shop-info :shop="shop"></detail-shop-info>
@@ -18,6 +14,8 @@
 		<back-top @click.native="backClick" class="back-top" v-show="isShowBackTop" ></back-top>
 		<detail-bottom-bar class="detail-bottom-bar" @addCart = "addToCart"></detail-bottom-bar>
 		<detail-services class="detail-services" v-if="servicesIsShow" ref="detailServices" :height="height"></detail-services>
+		
+		<toast :message="message" :show="show"></toast>
 	</div>
 </template>
 
@@ -39,6 +37,11 @@
 	import {getDetail,getRecommend,Goods,Shop} from 'network/detail.js'
 	import {debounce} from 'common/utils.js'
 	
+	import { mapActions } from 'vuex'
+	
+	
+	import Toast from '../../components/common/toast/Toast.vue'
+	
 	export default {
 		name:"Detail",
 		components:{
@@ -54,7 +57,8 @@
 			
 			Scroll,
 			BackTop,
-			GoodsList
+			GoodsList,
+			Toast
 		},
 		data() {
 			return{
@@ -73,6 +77,9 @@
 				height:10,
 				servicesIsShow:false,
 				isShowBackTop:false,
+				
+				message:'',
+				show:false
 			}
 		},
 		created() {
@@ -163,7 +170,7 @@
 			// console.log(this.themeTopYs)
 		},
 		methods:{
-			
+			...mapActions(['addCart']),
 			detailImageLoad(){
 				// refresh();
 				this.getThemeTopY()
@@ -228,7 +235,20 @@
 				product.iid = this.iid;
 				
 				// 2.将商品添加到购物车里
-				this.$store.dispatch('addCart',product)
+				this.addCart(product).then(res =>{
+					// this.show = true;
+					// this.message = res;
+					
+					// setTimeout(()=>{
+					// 	this.show = false;
+					// 	this.message =''
+					// },1500)
+					this.$toast.show(res,1000)
+				})
+				
+				// this.$store.dispatch('addCart',product).then(res =>{
+				// 	console.log(res)
+				// })
 			}
 		}
 	}

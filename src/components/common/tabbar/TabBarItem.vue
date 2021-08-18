@@ -16,7 +16,7 @@
       path:String,
       activeColor:{
         type:String,
-        default:'#d81e06'
+        default:'#ff5777'
       }
     },
     data() {
@@ -48,6 +48,7 @@
     /* 移动端tab-bar 一般为49px */
     height: 49px;
     font-size: 14px;
+	font-weight: 600;
   }
   .tab-bar-item img{
     margin-top: 3px ;

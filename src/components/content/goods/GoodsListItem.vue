@@ -57,6 +57,8 @@
 		width: 100%;
 		border-radius: 5px;
 		min-height: 258.75px;
+		object-fit:cover; /*对图片进行剪切，保留原始比例*/
+		object-position:top;/* 可能有时候图片不是从头部开始截图的 所以需要定位一下 */
 	}
 	.goods-info{
 		margin: 0 auto;
